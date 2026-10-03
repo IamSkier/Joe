@@ -521,7 +521,7 @@ input[type='checkbox'] {
 .header {
 	padding-top: 7rem;
 	padding-bottom: 5.5rem;
-	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/header-background.jpg') center center no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/end.png') center center no-repeat;
 	background-size: cover;
 	text-align: center;
 }
@@ -553,66 +553,7 @@ input[type='checkbox'] {
 }
 
 
-/*****************/
-/*     About     */
-/*****************/
-.basic-1 {
-	padding-top: 7.75rem;
-	padding-bottom: 5.25rem;
-}
 
-.basic-1 .text-container {
-	margin-bottom: 3rem;
-}
-
-.basic-1 .time {
-	margin-bottom: 0.5rem;
-	color: #0b36a8;
-	font-weight: 600;
-	font-size: 0.875rem;
-	line-height: 1.5rem;
-	font-family: "Poppins";
-}
-
-.basic-1 h6 {
-	margin-bottom: 0.125rem;
-}
-
-
-/********************/
-/*     Services     */
-/********************/
-.basic-2 {
-	padding-top: 7.75rem;
-	padding-bottom: 5.25rem;
-}
-
-.basic-2 .h2-heading {
-	margin-bottom: 0.75rem;
-	text-align: center;
-}
-
-.basic-2 .p-heading {
-	margin-bottom: 4rem;
-	text-align: center;
-}
-
-.basic-2 .text-box {
-	margin-bottom: 3rem;
-	padding: 3.5rem 1rem 2.125rem 1rem;
-	border: 1px solid #cfd7de;
-}
-
-.basic-2 .fas,
-.basic-2 .far {
-	margin-bottom: 1.75rem;
-	color: #0b36a8;
-	font-size: 3.5rem;
-}
-
-.basic-2 h4 {
-	letter-spacing: 1px;
-}
 
 
 /*******************/
@@ -1278,3 +1219,120 @@ a:hover.back-to-top {
 	/* end of extra pages */
 }
 /* end of min-width 1200px */
+
+    .descriptions {
+      padding: 100px 20px;
+    }
+
+    #animated-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+
+    .cursor {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 2rem;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
+/* ---------------- MY WORK SECTION ---------------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: 250px;
+  gap: 20px;
+}
+
+.work-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.work-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.work-item:hover img {
+  transform: scale(1.05);
+}
+
+.work-item .overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 15px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.work-item:hover .overlay {
+  transform: translateY(0);
+}
+
+.work-item h5 {
+  color: #fff !important;
+  font-size: 1.1rem;
+  margin: 0 0 5px;
+}
+
+.work-item p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #ccc;
+}
+
+.work-large {
+  grid-column: span 2;
+}
+
+.work-tall {
+  grid-row: span 2;
+}
+
+/* ---------------- BLOG SECTION ---------------- */
+#blog .card-img-top {
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+#blog .card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
+  border-radius: 10px;
+}
+
+#blog .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+#blog .card-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+#blog .card-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+#blog .btn-outline-primary {
+  border-radius: 20px;
+  font-size: 0.85rem;
+}

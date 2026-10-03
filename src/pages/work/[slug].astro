@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sitePath } from '../../utils/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${project.data.title} | Work | John`} description={project.data.summary} image={project.data.cover}>
+  <article class="article">
+    <a href={sitePath('work/')}>← All work</a>
+    <h1>{project.data.title}</h1>
+    <p class="content-copy">{project.data.summary}</p>
+    {project.data.cover && <img class="article-cover" src={sitePath(project.data.cover)} alt={project.data.title} />}
+    {project.data.technologies.length > 0 && <ul class="tag-list">{project.data.technologies.map((technology) => <li>{technology}</li>)}</ul>}
+    <div class="article-content"><Content /></div>
+    <p>{project.data.liveUrl && <a href={project.data.liveUrl}>Live project</a>}{project.data.liveUrl && project.data.sourceUrl && ' · '}{project.data.sourceUrl && <a href={project.data.sourceUrl}>Source code</a>}</p>
+  </article>
+</BaseLayout>

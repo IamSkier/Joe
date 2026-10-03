@@ -76,3 +76,33 @@
 	});
 
 })(jQuery);
+const texts = ["Design Applications", "Build Applications", "Analyze Applications"];
+  const speed = 100;
+  const pause = 1500;
+
+  let i = 0;
+  let j = 0;
+  let isDeleting = false;
+  const el = document.getElementById("animated-text");
+
+  function type() {
+    const current = texts[i];
+    if (isDeleting) {
+      el.textContent = current.substring(0, j--);
+    } else {
+      el.textContent = current.substring(0, j++);
+    }
+
+    if (!isDeleting && j === current.length + 1) {
+      isDeleting = true;
+      setTimeout(type, pause);
+    } else if (isDeleting && j === 0) {
+      isDeleting = false;
+      i = (i + 1) % texts.length;
+      setTimeout(type, 300);
+    } else {
+      setTimeout(type, isDeleting ? speed / 2 : speed);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", type);

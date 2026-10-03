@@ -1,0 +1,1 @@
+Place images used by posts and project pages in this folder. Reference a cover in frontmatter with `/images/content/filename.jpg`.
