@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../consts';
 import { sitePath } from '../utils/site';
 
 const [allPosts, allProjects] = await Promise.all([
@@ -13,58 +12,51 @@ const projects = allProjects.filter(({ data }) => !data.draft && data.featured).
 ---
 
 <BaseLayout home>
-  <header id="header" class="header legacy-hero">
-    <div class="descriptions">
-      <h1>Hi! My name is {SITE.name}.</h1>
-      <p class="hero-subtitle">I design, build, and analyze applications.</p>
-      <a class="btn-solid-lg" href={sitePath('#my-work')}>Explore my work</a>
+  <header id="header" class="header home-hero">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Designer · builder · analyst</p>
+        <h1>I turn ideas into thoughtful digital work.</h1>
+        <p class="hero-summary">I design experiences, build with intention, and turn complexity into something clear and useful.</p>
+        <div class="hero-actions">
+          <a class="hero-link primary" href={sitePath('#my-work')}>View work <span aria-hidden="true">↘</span></a>
+          <a class="hero-link secondary" href={sitePath('#blog')}>Read notes</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Portrait illustration">
+        <div class="portrait-card">
+          <div class="portrait-glow"></div>
+          <img class="hero-art" src={sitePath('images/mee.png')} alt="Portrait of John working at a desk" fetchpriority="high" />
+        </div>
+      </div>
     </div>
   </header>
 
-  <section id="about" class="about-section">
-    <div class="about-inner">
-      <img class="about-photo" src={sitePath('images/testimonial-1.jpg')} alt={`Portrait of ${SITE.name}`} />
-      <div>
-        <h2>Hello, I'm {SITE.name}</h2>
-        <p class="about-lead">A software developer who turns ideas into interactive, functional, and meaningful digital experiences.</p>
-        <h3>A little about me</h3>
-        <p>I enjoy coding, solving problems, and designing thoughtful user experiences. I'm always curious and constantly learning something new.</p>
-        <h3>Skills</h3>
-        <ul class="skill-list">
-          <li>Python</li><li>Django</li><li>JavaScript</li><li>React</li><li>Bootstrap</li><li>MySQL</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="my-work" class="homepage-section work-section">
+  <section id="my-work" class="home-section work-section">
     <div class="section-inner">
-      <div class="section-heading"><h2>My Work</h2><p>A blend of creativity, code, and clean delivery.</p></div>
-      {projects.length ? <div class="work-grid">
-        {projects.map((project) => <a class="work-item" href={sitePath(`work/${project.id}/`)}>
-          {project.data.cover && <img src={sitePath(project.data.cover)} alt={project.data.title} loading="lazy" />}
-          <div class="overlay"><h3>{project.data.title}</h3><p>{project.data.summary}</p></div>
+      <header class="section-heading"><p class="eyebrow">01 / SELECTED WORK</p><h2>Work</h2></header>
+      {projects.length ? <div class="project-list">
+        {projects.map((project, index) => <a class="project-row" href={sitePath(`work/${project.id}/`)}>
+          <span class="project-number">0{index + 1}</span>
+          <span class="project-copy"><strong>{project.data.title}</strong><span>{project.data.summary}</span></span>
+          <span class="project-arrow" aria-hidden="true">↗</span>
         </a>)}
-      </div> : <p class="section-empty">Your featured projects will appear here when you publish them.</p>}
-      <a class="section-link" href={sitePath('work/')}>See all work →</a>
+      </div> : <p class="empty-line">No projects published yet.</p>}
     </div>
   </section>
 
-  <section id="blog" class="homepage-section blog-section">
+  <section id="blog" class="home-section writing-section">
     <div class="section-inner">
-      <div class="section-heading"><h2>Blog</h2><p>Notes, lessons, and ideas from the work.</p></div>
-      {posts.length ? <div class="blog-grid">
-        {posts.map((post) => <article class="blog-card">
-          {post.data.cover && <img src={sitePath(post.data.cover)} alt={post.data.title} loading="lazy" />}
-          <div class="blog-card-body">
-            <p class="entry-meta"><time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en', { dateStyle: 'long' })}</time></p>
-            <h3><a href={sitePath(`blog/${post.id}/`)}>{post.data.title}</a></h3>
-            <p>{post.data.summary}</p>
-            <a class="read-more" href={sitePath(`blog/${post.id}/`)}>Read more →</a>
-          </div>
-        </article>)}
-      </div> : <p class="section-empty">Your latest writing will appear here when you publish a post.</p>}
-      <a class="section-link" href={sitePath('blog/')}>Read all posts →</a>
+      <header class="section-heading"><p class="eyebrow">02 / NOTES</p><h2>Writing</h2></header>
+      {posts.length ? <div class="writing-list">
+        {posts.map((post) => <a class="writing-row" href={sitePath(`blog/${post.id}/`)}>
+          <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en', { year: 'numeric', month: 'short' })}</time>
+          <span><strong>{post.data.title}</strong><span>{post.data.summary}</span></span>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a>)}
+      </div> : <p class="empty-line">No writing yet.</p>}
+      <a class="section-link" href={sitePath('blog/')}>All writing <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </BaseLayout>

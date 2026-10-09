@@ -1,9 +1,8 @@
 export const SITE = {
   name: 'John',
-  title: 'John | Developer and maker',
-  description: 'Selected software projects, experiments, and writing by John.',
+  title: 'John | Portfolio',
+  description: 'A personal portfolio of work and writing.',
   author: 'John',
-  email: 'REPLACE_WITH_YOUR_EMAIL',
-  github: 'https://github.com/REPLACE_WITH_YOUR_USERNAME',
+  github: '',
   linkedin: ''
 };

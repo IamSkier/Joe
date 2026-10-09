@@ -8,12 +8,13 @@ const projects = (await getCollection('projects', ({ data }) => !data.draft)).so
 
 <BaseLayout title="Work | John">
   <section class="page-shell">
-    <header class="page-intro"><h1>Work</h1><p>Selected projects, experiments, and things I’ve made.</p></header>
-    {projects.length ? <div class="entry-grid">
-      {projects.map((project) => <article class="entry-card">
-        {project.data.cover && <img src={sitePath(project.data.cover)} alt={project.data.title} loading="lazy" />}
-        <div class="entry-card-body"><h2><a href={sitePath(`work/${project.id}/`)}>{project.data.title}</a></h2><p>{project.data.summary}</p>{project.data.technologies.length > 0 && <ul class="tag-list">{project.data.technologies.map((technology) => <li>{technology}</li>)}</ul>}</div>
-      </article>)}
+    <header class="page-intro"><p class="eyebrow">SELECTED PROJECTS</p><h1>Work</h1></header>
+    {projects.length ? <div class="project-list">
+      {projects.map((project, index) => <a class="project-row" href={sitePath(`work/${project.id}/`)}>
+        <span class="project-number">0{index + 1}</span>
+        <span class="project-copy"><strong>{project.data.title}</strong><span>{project.data.summary}</span></span>
+        <span class="project-arrow" aria-hidden="true">↗</span>
+      </a>)}
     </div> : <p class="empty-state">No projects published yet.</p>}
   </section>
 </BaseLayout>

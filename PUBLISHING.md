@@ -1,6 +1,31 @@
 # Publishing posts and projects
 
-The website is built from Markdown with Astro. Add files locally, preview the site, and push to `main`; GitHub Actions builds and deploys the site to GitHub Pages.
+The website is built from Markdown with Astro. You can manage posts and projects in the Pages CMS browser dashboard, or edit the Markdown files directly. Changes saved to `main` trigger the existing GitHub Actions deployment.
+
+## Use the browser dashboard
+
+The repository includes a Pages CMS setup in `.pages.yml`.
+
+1. Push `.pages.yml` to the repository's `main` branch.
+2. Open [app.pagescms.org](https://app.pagescms.org/) and sign in with GitHub.
+3. Install/authorize the Pages CMS GitHub App for the `IamSkier/Joe` repository, then open that repository.
+4. Choose **Blog posts** or **Projects** in the sidebar.
+
+### Create
+
+Choose **New** in Blog posts or Projects, fill in the form, and save. The rich-text body editor supports headings, links, lists, and images. Cover images upload to `public/images/content/`.
+
+New entries start with **Keep as draft** enabled, so they stay out of the public site. Turn it off to publish. For a project, enable **Show on homepage** if you also want it featured there. Saving commits the Markdown file to GitHub; a save to `main` starts the site deployment.
+
+### Edit
+
+Open an entry from its collection, update its fields or body, and save. The editor commits the file change to GitHub. Restore **Keep as draft** to hide an entry without deleting it.
+
+### Rename or delete
+
+Use the entry's actions/menu to rename or delete it. Renaming changes the Markdown filename, which also changes that entry's URL. Deleting removes the Markdown entry from the branch and the site on the next deployment. This is a real delete; GitHub commit history can be used to restore it. Deleting an entry does not necessarily delete an image it used, so remove unused uploads separately from the media area if you want to clean those up.
+
+The dashboard edits the repository; it is not a private page hosted inside the portfolio. GitHub grants the CMS access when you authorize its app. For more about the configuration, see [Pages CMS documentation](https://pagescms.org/docs/).
 
 ## Write a blog post
 

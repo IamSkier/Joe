@@ -15,12 +15,12 @@ interface Props {
 const {
   title = SITE.title,
   description = SITE.description,
-  image = '/images/testimonial-1.jpg',
+  image,
   type = 'website',
   home = false
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, new URL(sitePath(''), Astro.site));
-const socialImage = new URL(sitePath(image), Astro.site);
+const socialImage = image ? new URL(sitePath(image), Astro.site) : undefined;
 ---
 
 <!doctype html>
@@ -35,28 +35,26 @@ const socialImage = new URL(sitePath(image), Astro.site);
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImage} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} writing`} href={sitePath('rss.xml')} />
     <link rel="icon" href={sitePath('images/favicon.png')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body class={home ? 'homepage' : undefined}>
     <header class:list={['site-header', home && 'site-header-home']}>
-      <a class="site-brand" href={sitePath('')}>{SITE.name}</a>
+      <a class="site-brand" href={sitePath('')} aria-label={`${SITE.name} home`}>JDN<span>.</span></a>
       <nav aria-label="Main navigation">
         {home ? <>
-          <a href={`${sitePath('')}#header`}>Me</a>
-          <a href={`${sitePath('')}#my-work`}>Works</a>
-          <a href={`${sitePath('')}#blog`}>Blog</a>
+          <a href={`${sitePath('')}#my-work`}>Work</a>
+          <a href={`${sitePath('')}#blog`}>Writing</a>
         </> : <>
           <a href={sitePath('work/')}>Work</a>
           <a href={sitePath('blog/')}>Writing</a>
-          <a href={`mailto:${SITE.email}`}>Contact</a>
         </>}
       </nav>
     </header>
@@ -66,7 +64,6 @@ const socialImage = new URL(sitePath(image), Astro.site);
     <footer class="site-footer">
       <span>© {new Date().getFullYear()} {SITE.name}</span>
       <div>
-        <a href={SITE.github}>GitHub</a>
         {SITE.linkedin && <a href={SITE.linkedin}>LinkedIn</a>}
         <a href={sitePath('rss.xml')}>RSS</a>
       </div>

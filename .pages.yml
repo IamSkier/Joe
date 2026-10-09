@@ -1,0 +1,134 @@
+media:
+  - name: covers
+    label: Cover images
+    input: public/images/content
+    output: /images/content
+    extensions: [png, jpg, jpeg, webp, gif]
+    rename: safe
+  - name: body-images
+    label: Article images
+    input: public/images/content
+    output: ../../images/content
+    extensions: [png, jpg, jpeg, webp, gif]
+    rename: safe
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: src/content/posts
+    exclude: [first-post.md]
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, date, draft]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    operations:
+      create: true
+      rename: true
+      delete: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Publish date
+        type: date
+        required: true
+      - name: summary
+        label: Short summary
+        type: text
+        required: true
+      - name: cover
+        label: Cover image
+        type: image
+        options:
+          media: covers
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: draft
+        label: Keep as draft
+        type: boolean
+        default: true
+      - name: body
+        label: Post content
+        type: rich-text
+        options:
+          format: markdown
+          media: body-images
+          path: public/images/content
+          rename: safe
+
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    exclude: [first-project.md]
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, featured, draft]
+    operations:
+      create: true
+      rename: true
+      delete: true
+    fields:
+      - name: title
+        label: Project name
+        type: string
+        required: true
+      - name: summary
+        label: Short summary
+        type: text
+        required: true
+      - name: cover
+        label: Cover image
+        type: image
+        options:
+          media: covers
+      - name: technologies
+        label: Technologies
+        type: string
+        list: true
+      - name: liveUrl
+        label: Live project URL
+        type: string
+      - name: sourceUrl
+        label: Source code URL
+        type: string
+      - name: featured
+        label: Show on homepage
+        type: boolean
+        default: false
+      - name: draft
+        label: Keep as draft
+        type: boolean
+        default: true
+      - name: body
+        label: Project details
+        type: rich-text
+        options:
+          format: markdown
+          media: body-images
+          path: public/images/content
+          rename: safe
+
+settings:
+  commit:
+    templates:
+      create: "content: add {path}"
+      update: "content: edit {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath} to {newPath}"
