@@ -20,7 +20,7 @@ const {
   home = false
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, new URL(sitePath(''), Astro.site));
-const socialImage = image ? new URL(sitePath(image), Astro.site) : undefined;
+const socialImage = image ? new URL(sitePath(image), Astro.site) : new URL(sitePath('images/sipme.png'), Astro.site);
 ---
 
 <!doctype html>
@@ -39,7 +39,7 @@ const socialImage = image ? new URL(sitePath(image), Astro.site) : undefined;
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} writing`} href={sitePath('rss.xml')} />
-    <link rel="icon" href={sitePath('images/favicon.png')} />
+    <link rel="icon" href={sitePath('images/sipme.png')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
