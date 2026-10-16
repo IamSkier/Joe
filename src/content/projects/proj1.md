@@ -1,6 +1,7 @@
 ---
 title: Shop
 summary: My shop app y'all.
+cover: /images/content/login1440.png
 featured: true
 draft: false
 ---
